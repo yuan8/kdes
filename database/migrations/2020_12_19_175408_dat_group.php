@@ -17,15 +17,15 @@ class DatGroup extends Migration
 
          Schema::create('data_group', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_data')->nullable();
-            $table->bigInteger('id_category')->nullable();
+            $table->bigInteger('id_data')->unsigned();
+            $table->bigInteger('id_category')->unsigned();
 
             $table->foreign('id_category')
-                  ->references('id')->on('id')
+                  ->references('id')->on('category')
                   ->onDelete('cascade')->onUpdate('cascade');
 
              $table->foreign('id_data')
-                  ->references('id')->on('id')
+                  ->references('id')->on('data')
                   ->onDelete('cascade')->onUpdate('cascade');
 
 

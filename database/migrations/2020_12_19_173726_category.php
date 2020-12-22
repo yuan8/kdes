@@ -18,7 +18,9 @@ class Category extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('name');
+            $table->string('slug');
             $table->string('image_path')->nullable();
+            $table->string('image_path2')->nullable();
             $table->string('contact')->nullable();
             $table->string('source_direct')->nullable();
             $table->mediumText('description')->nullable();

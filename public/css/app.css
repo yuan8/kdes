@@ -52,3 +52,10 @@
     cursor: pointer;
     top: 50px;
 }
+.breadcrumb{
+	margin-bottom: 10px;
+}
+
+.background-primary{
+	background: linear-gradient(163deg, rgba(146,146,232,1) 17%, rgba(51,122,183,1) 52%, rgba(42,67,111,1) 88%);
+}

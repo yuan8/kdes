@@ -2430,6 +2430,8 @@ if (typeof jQuery === 'undefined') {
   // ======================
 
   var Affix = function (element, options) {
+   $(element).css('width',$(element).width());
+
     this.options = $.extend({}, Affix.DEFAULTS, options)
 
     var target = this.options.target === Affix.DEFAULTS.target ? $(this.options.target) : $(document).find(this.options.target)

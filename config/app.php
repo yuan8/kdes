@@ -226,6 +226,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'MENUS' => App\Providers\MENUPROVIDER::class,
+        'YDB' => App\Providers\YDBPROVIDER::class,
+
 
 
     ],

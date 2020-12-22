@@ -26,12 +26,12 @@ class Data extends Migration
             $table->integer('year')->nullable();
             $table->text('tags')->nullable();
             $table->text('keywords')->nullable();
-            $table->bigInteger('organization_id')->nullable();
+            $table->bigInteger('organization_id')->unsigned()->nullable();
             $table->mediumText('description')->nullable();
             $table->timestamps();
 
             $table->foreign('organization_id')
-                  ->references('id')->on('id')
+                  ->references('id')->on('category')
                   ->onDelete('cascade')->onUpdate('cascade');
 
 

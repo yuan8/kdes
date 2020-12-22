@@ -12,8 +12,10 @@
 */
 
 Route::prefix('{tahun?}')->middleware('bindTahun')->group(function(){
-	Route::get('/', function () {
-    	return view('welcome');
-	})->name('index');
+	Route::get('/', 'HomeCtrl@index')->name('index');
+
+	Route::get('/query-data', 'DataCTRL@index')->name('query.data');
+	Route::get('/query-data-categorical/{id_category}/{slug}', 'DataCtrl@categorical')->name('query.data.categorycal');
+
 
 });

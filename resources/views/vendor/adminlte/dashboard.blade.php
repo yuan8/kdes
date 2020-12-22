@@ -124,7 +124,7 @@ $CONF_MENU=MENUS::dashboard();
             </section>
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content" style="padding-bottom: 30px;">
 
                 @yield('content')
 
