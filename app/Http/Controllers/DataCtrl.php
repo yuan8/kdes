@@ -56,8 +56,6 @@ class DataCtrl extends Controller
     	$data=DB::table('data as d')
     	->leftJoin('category as i',[['i.id','=','d.organization_id'],['i.type','=',DB::raw("'INSTANSI'")]])
     	->leftJoin(DB::raw("(select GROUP_CONCAT(concat(c.id,'|',c.name),'||') as names,dg.id_data from category as c left join data_group as dg on dg.id_category where c.type='TEMA' group by dg.id) as tema"),'tema.id_data','=','d.id')
-    	
-
     	->selectRaw('d.*,i.name as oranization_name,i.image_path as organization_image_path,tema.names as temas,i.name as orgas');
 
     	if($instansi_data->type=='TEMA'){
@@ -100,5 +98,30 @@ class DataCtrl extends Controller
     	return view('data.query')->with(['data'=>$data,'request'=>$request,'instansi'=>$instansi_data]);
 
     	
+    }
+
+
+    public function detail($tahun,$id,$slug=null){
+        $instansi=null;
+        $data=DB::table('data as d')
+        ->where('id',$id)->first();
+        // dd($data);
+
+        if($data){
+            $instansi=$instansi_data=DB::table('category')->where('id',$data->organization_id)->first();
+            switch ($data->delivery_type) {
+                case 'DATASET':
+                    return view('data.data-set')->with(['data'=>$data,'instansi'=>$instansi]);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }else{
+            return abort(404);
+        }
+       
+
     }
 }

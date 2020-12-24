@@ -10,7 +10,7 @@ class HomeCtrl extends Controller
 
     public function index($tahun){
     	$tema=DB::table('category')->where('type','TEMA')->get();
-    	return view('welcome')->with('tema',$tema);
+    	return view('index')->with('tema',$tema);
 
     }
 }

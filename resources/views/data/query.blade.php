@@ -7,7 +7,7 @@
 <div class="banner-content text-center p-10 p-b-50" style="position: relative; background:linear-gradient(163deg, rgba(146,146,232,1) 17%, rgba(51,122,183,1) 52%, rgba(42,67,111,1) 88%); min-height: 100px; margin-bottom: 50px;">
 	<ol class="breadcrumb text-left">
     <li><a href="{{url('')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Cari Data</li>
+    <li class="active text-capitalize">{{ strtolower((!empty($instansi)) ?$instansi->type.' - '.$instansi->name:'Cari Data')}}</li>
   </ol>
 
 
@@ -18,7 +18,7 @@
 	<div  style="left:0; right: 0; margin:auto; height: 55px; width: 90%; position: absolute; bottom:-30px; ">
 		<form action="{{url()->current()}}" method="get">
 			<div class="input-group" style="border: 2px solid #6db3ee;border-radius: 30px; overflow: hidden; ">
-      <input type="text" class="form-control" name="q" value="{{$request->q}}" placeholder="Cari Data,Tema,Instansi" style="height: 55px;">
+      <input type="text" class="form-control" name="q" value="{{$request->q}}" placeholder="Cari Data" style="height: 55px;">
       <span class="input-group-btn">
         <button class="btn btn-primary" type="submit" style="height: 55px; min-width: 100px;"><i class="fa fa-search"></i></button>
       </span>
@@ -53,14 +53,31 @@
 	</div>
 	<div class="col-md-9">
 		@foreach($data as $d)
-			<a href="">
-				<div class="box box-solid">
-					<div class="box-body">
-						<h5 class="text-capitalize text-dark"><b>{{$d->name}}</b></h5>
-						<p class="text-capitalize text-muted">{{$d->description}}</p>
-					</div>
-				</div>
-			</a>
+			<div class="info-box ">
+            <span class="info-box-icon background-primary text-white">
+            	@include('partials.icon-data',['type'=>$d->delivery_type])
+            </span>
+            <div class="info-box-content">
+              <span class="info-box-text">
+              	<a href="">{{$d->name}}</a>
+              </span>
+             
+              <span class="progress-description text-muted">
+                   {{$d->description}}
+                  </span>
+                   <div class="progress">
+              	<div class="progress"></div>
+              </div>
+                  	<div class="btn-group">
+                  		<a href="" class="btn btn-success btn-xs">Download</a>
+                  		<a href="{{route('query.data.detail',['tahun'=>$GLOBALS['tahun_access'],'id'=>$d->id,'slug'=>'ddd'])}}" class="btn btn-info btn-xs">Lihat Data</a>
+
+                  		</div>
+                   - {{Carbon\Carbon::parse($d->updated_at)->format('d F Y h:i')}}
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+			
 		@endforeach
 
 		@if(count($data)<1)
